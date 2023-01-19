@@ -66,6 +66,14 @@ export class AuthService {
 
   }
 
+  checkAuthStatus( user: User ) {
+
+    return {
+      ...user,
+      token: this.getJwToken({ id: user.id })
+    }
+  }
+
   private getJwToken( payload: JwtPayload ) {
 
     const token = this.jwtService.sign( payload );
@@ -82,5 +90,6 @@ export class AuthService {
     throw new InternalServerErrorException('Please check server logs');
 
   }
+
 
 }
